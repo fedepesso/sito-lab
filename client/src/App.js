@@ -8,16 +8,6 @@ import { Nav, Navbar, Card, Button, CardDeck } from 'react-bootstrap';
 function App() {
   return (
     <div className="App" >
-      <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand href="#home">Esperienze di Laboratorio</Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link href="#features">Primo anno</Nav.Link>
-          <Nav.Link href="#features">Secondo anno</Nav.Link>
-          <Nav.Link href="#features">Terzo anno</Nav.Link>
-          <Nav.Link href="#features">Quarto anno</Nav.Link>
-          <Nav.Link href="#features">Quinto anno</Nav.Link>
-        </Nav>
-      </Navbar>
       <Seeder />
     </div>
   );
@@ -66,9 +56,22 @@ const Seeder = () => {
 
 
 
-function Download(url) {
-    document.getElementById('my_iframe').src = url;
+
+
+
+function DefaultNav() {
+  return (
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar.Brand href="#home">Esperienze di Laboratorio</Navbar.Brand>
+      <Nav className="mr-auto">
+        <Nav.Link href="#features">Primo anno</Nav.Link>
+        <Nav.Link href="#features">Secondo anno</Nav.Link>
+        <Nav.Link href="#features">Terzo anno</Nav.Link>
+        <Nav.Link href="#features">Quarto anno</Nav.Link>
+        <Nav.Link href="#features">Quinto anno</Nav.Link>
+      </Nav>
+    </Navbar>)
 }
 
 
-export default App;
+export {App, DefaultNav};

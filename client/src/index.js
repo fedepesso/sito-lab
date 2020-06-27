@@ -1,17 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { App, DefaultNav } from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <div>
+    <DefaultNav />
     <App />
-  </React.StrictMode>,
+  </div>,
   document.getElementById('root')
 );
+
+
+
+
+/*
+import * as serviceWorker from './serviceWorker';
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+sinceramente non so a che serva quindi ve lo lascio ma non e' attivo
+
+*/
