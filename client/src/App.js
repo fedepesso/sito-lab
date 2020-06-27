@@ -16,22 +16,21 @@ const list = [
 // la costante list dovra' essere sostuita dal risultato di una chiamata al db
 
 
-const Seeder = () => {
+const Seeder = (tipo) => {
   let res = list.map((e,i) => {
-    let card = 
+    return (
       <Card Style='margin: 30px 30px 0px 30px'>
         <Card.Body>
           <Card.Title Style='font-size: 35px'>{e.titolo}</Card.Title>
           <Card.Text Style='font-size: 18px'>
             {e.descrizione}
           </Card.Text>
-          <Button variant="danger" Style='font-size:15px'>Download protoccolo di Laboratorio</Button>
+          <Button variant="danger" Style='font-size:15px' onClick={Raid()}>Visualizza il protoccolo di Laboratorio</Button>
         </Card.Body>
         <Card.Footer>
           Esperienza pensata per classi di {e.classe}
         </Card.Footer>
-    </Card>
-    return card
+      </Card>)
   })
 
   let numDecks = res.length/3
@@ -48,7 +47,7 @@ const Seeder = () => {
 
 function App() {
   return (
-    <div className="App" >
+    <div className="App">
       <Seeder />
     </div>
   );
@@ -69,6 +68,18 @@ function DefaultNav() {
     </Navbar>)
 }
 
+function Protocol(e){
+  return(
+    <div>
+      <p>prova prova {e}</p>
+    </div>
+  )
+}
+
+function Raid(){
+  //dovrebbe scambiare app con protocol, che dovra' contenere il protocollo
+}
+
 //defaultnav e' semplicemente la navbar che resta costante nel tempo quindi mi sembrava giusto separarla dal resto dell'app
 //la funzione seeder crea deck di card da 3 con all'interno un titolo, una descrizione, un pulsante che portera' all protocollo, e un footer stupido
 //le esperienze che verranno messe nelle card dovranno avere gli stessi attributi del lorem ipsum mentre la pagina del singolo protocollo avra' solo il protocollo in se' e non la descrizione
@@ -77,4 +88,4 @@ function DefaultNav() {
 
 
 
-export {App, DefaultNav};
+export {App, DefaultNav, Protocol};
