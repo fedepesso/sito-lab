@@ -4,25 +4,16 @@ import './App.css';
 import { Nav, Navbar, Card, Button, CardDeck } from 'react-bootstrap';
 
 
-
-function App() {
-  return (
-    <div className="App" >
-      <Seeder />
-    </div>
-  );
-}
-
 const list = [
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Prima', id: 0},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Seconda', id: 1},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Terza', id: 2},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quarta', id: 3},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quinta', id: 4},
+  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Prima'},
+  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Seconda'},
+  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Terza'},
+  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quarta'},
+  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quinta'},
 
 ]
 
-// la costante list dovra' essere sostuita dal risultato di una chiamata al db che ci buttera' tra le 7 e le 12 esperienza a caso
+// la costante list dovra' essere sostuita dal risultato di una chiamata al db
 
 
 const Seeder = () => {
@@ -35,7 +26,6 @@ const Seeder = () => {
             {e.descrizione}
           </Card.Text>
           <Button variant="danger" Style='font-size:15px'>Download protoccolo di Laboratorio</Button>
-          <iframe id="my_iframe" Style="display:none;" title={e.id}></iframe>
         </Card.Body>
         <Card.Footer>
           Esperienza pensata per classi di {e.classe}
@@ -56,7 +46,13 @@ const Seeder = () => {
 
 
 
-
+function App() {
+  return (
+    <div className="App" >
+      <Seeder />
+    </div>
+  );
+}
 
 
 function DefaultNav() {
@@ -72,6 +68,13 @@ function DefaultNav() {
       </Nav>
     </Navbar>)
 }
+
+//defaultnav e' semplicemente la navbar che resta costante nel tempo quindi mi sembrava giusto separarla dal resto dell'app
+//la funzione seeder crea deck di card da 3 con all'interno un titolo, una descrizione, un pulsante che portera' all protocollo, e un footer stupido
+//le esperienze che verranno messe nelle card dovranno avere gli stessi attributi del lorem ipsum mentre la pagina del singolo protocollo avra' solo il protocollo in se' e non la descrizione
+//App e' diciamo il body della pagina, la parte che verra' modificata quando si cercheranno le varie esperienze filtrate per anno, bastera' modificare 'list'
+//per ogni nuovo elemento che creiamo dobbiamo aggiungere il nome all'export e stare attenti a richiamarlo anche in index.js
+
 
 
 export {App, DefaultNav};

@@ -12,7 +12,7 @@ ReactDOM.render(
 );
 
 
-
+//qui si rederizza la pagina, come si vede tutto sara' in un div e iniziera' sempre con la default nav; l'elemento che viene renderizzato e' root in index.html
 
 /*
 import * as serviceWorker from './serviceWorker';
