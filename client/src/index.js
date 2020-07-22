@@ -1,8 +1,6 @@
-/*
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import { Nav, Navbar, Card, Button, CardDeck } from 'react-bootstrap';
 import './index.css';
 
@@ -28,7 +26,7 @@ const Seeder = (tipo) => {
           <Card.Text Style='font-size: 18px'>
             {e.descrizione}
           </Card.Text>
-          <Button variant="danger" Style='font-size:15px' onClick={Raid()}>Visualizza il protoccolo di Laboratorio</Button>
+          <Button variant="danger" Style='font-size:15px' onClick={Raid}>Visualizza il protoccolo di Laboratorio</Button>
         </Card.Body>
         <Card.Footer>
           Esperienza pensata per classi di {e.classe}
@@ -36,8 +34,6 @@ const Seeder = (tipo) => {
       </Card>)
   })
 
-  let numDecks = res.length/3
-  console.log(numDecks)
   let seed =[]
   for(let i = 0; i<res.length; i+=3){
     let deck = res.slice(i, i+3)
@@ -71,36 +67,32 @@ function DefaultNav() {
     </Navbar>)
 }
 
-function Protocol(e){
-  return(
-    <div>
-      <p>{e}</p>
-    </div>
-  )
-}
+
 
 function Raid(){
-  let e=fetch(`/api/Fill`)
-  Protocol(e)
+    fetch(`/api/test`)
+        .then(data => data.json())
+        .then(success => {
+            ReactDOM.render(
+                <div Style="color : white; text-align : center">
+                    {success.data}
+                    <br></br>
+                    <Button variant="info" Style='font-size:15px' onClick={Home}>Home</Button>
+                </div>,
+                document.getElementById('root')
+            )
+            console.log(success.data)
+        });
 }
 
+function Home(){
+    ReactDOM.render(
+    <div>
+        <DefaultNav />
+        <App />
+    </div>,
+    document.getElementById('root')
+    );
+}
 
-ReactDOM.render(
-  <div>
-    <DefaultNav />
-    <App />
-  </div>,
-  document.getElementById('root')
-);
-
-*/
-
-//defaultnav e' semplicemente la navbar che resta costante nel tempo quindi mi sembrava giusto separarla dal resto dell'app
-//la funzione seeder crea deck di card da 3 con all'interno un titolo, una descrizione, un pulsante che portera' all protocollo, e un footer stupido
-//le esperienze che verranno messe nelle card dovranno avere gli stessi attributi del lorem ipsum mentre la pagina del singolo protocollo avra' solo il protocollo in se' e non la descrizione
-//App e' diciamo il body della pagina, la parte che verra' modificata quando si cercheranno le varie esperienze filtrate per anno, bastera' modificare 'list'
-//per ogni nuovo elemento che creiamo dobbiamo aggiungere il nome all'export e stare attenti a richiamarlo anche in index.js
-
-
-
-//export {App, DefaultNav, Protocol};
+Home()
