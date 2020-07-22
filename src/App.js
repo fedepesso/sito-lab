@@ -1,7 +1,10 @@
+/*
 import React from 'react';
+import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Nav, Navbar, Card, Button, CardDeck } from 'react-bootstrap';
+import './index.css';
 
 
 const list = [
@@ -71,14 +74,26 @@ function DefaultNav() {
 function Protocol(e){
   return(
     <div>
-      <p>prova prova {e}</p>
+      <p>{e}</p>
     </div>
   )
 }
 
 function Raid(){
-  //dovrebbe scambiare app con protocol, che dovra' contenere il protocollo
+  let e=fetch(`/api/Fill`)
+  Protocol(e)
 }
+
+
+ReactDOM.render(
+  <div>
+    <DefaultNav />
+    <App />
+  </div>,
+  document.getElementById('root')
+);
+
+*/
 
 //defaultnav e' semplicemente la navbar che resta costante nel tempo quindi mi sembrava giusto separarla dal resto dell'app
 //la funzione seeder crea deck di card da 3 con all'interno un titolo, una descrizione, un pulsante che portera' all protocollo, e un footer stupido
@@ -88,4 +103,4 @@ function Raid(){
 
 
 
-export {App, DefaultNav, Protocol};
+//export {App, DefaultNav, Protocol};
