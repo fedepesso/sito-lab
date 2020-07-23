@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, Navbar, Card, Button, CardDeck } from 'react-bootstrap';
 import './index.css';
-
+import {Home} from './home.js'
 
 const list = [
   {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Prima', id:0},
@@ -11,7 +11,7 @@ const list = [
   {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Terza', id:2},
   {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quarta', id:3},
   {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quinta', id:4},
-
+  
 ]
 
 // la costante list dovra' essere sostuita dal risultato di una chiamata al db
@@ -20,7 +20,7 @@ const list = [
 const Seeder = (tipo) => {
   let res = list.map((e,i) => {
     return (
-      <Card Style='margin: 30px 30px 0px 30px'>
+      <Card Style='margin: 60px 30px 0px 30px'>
         <Card.Body>
           <Card.Title Style='font-size: 35px'>{e.titolo}</Card.Title>
           <Card.Text Style='font-size: 18px'>
@@ -53,9 +53,9 @@ function App() {
 }
 
 
-function DefaultNav() {
+export function DefaultNav() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <Navbar.Brand href="#home">Esperienze di Laboratorio</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="#features">Primo anno</Nav.Link>
@@ -77,7 +77,7 @@ function Raid(){
                 <div Style="color : white; text-align : center">
                     {success.data}
                     <br></br>
-                    <Button variant="info" Style='font-size:15px' onClick={Home}>Home</Button>
+                    <Button variant="info" Style='font-size:15px' onClick={Section}>Home</Button>
                 </div>,
                 document.getElementById('root')
             )
@@ -85,7 +85,7 @@ function Raid(){
         });
 }
 
-function Home(){
+function Section(){
     ReactDOM.render(
     <div>
         <DefaultNav />
