@@ -20,7 +20,6 @@ export function Viewer(){
                 </div>,
                 document.getElementById('root')
             )
-            console.log(success.data)
         });
 }
 

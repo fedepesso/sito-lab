@@ -55,7 +55,7 @@ function App() {
 
 export function DefaultNav() {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" Style='margin : 0px 0px 0px 0px'>
       <Navbar.Brand href="#home">Esperienze di Laboratorio</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="#features">Primo anno</Nav.Link>

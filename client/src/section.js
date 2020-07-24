@@ -6,13 +6,18 @@ import './index.css';
 import {DefaultNav} from './index.js'
 import {Viewer} from './viewer.js'
 
-async function Seeder(tipo){
-    const list = await fetch(`/api/collect-protocol`)
+async function get_list(){
+    let list = await fetch(`/api/collect-protocol`)
                     .then(data => data.json())
                     .then(success => success.protocols);
-    
-    let cards = list.map((e) => {
-        return (
+    return list
+}
+
+
+async function Seeder(tipo){
+    const list = await get_list()
+    let cards = await list.map((e) => {
+        return(
             <Card Style='margin: 60px 30px 0px 30px'>
             <Card.Body>
                 <Card.Title Style='font-size: 35px'>{e.titolo}</Card.Title>
@@ -29,17 +34,18 @@ async function Seeder(tipo){
 
     let seed =[]
     for(let i = 0; i<cards.length; i+=3){
-    let deck = cards.slice(i, i+3)
-    seed.push(<CardDeck>{deck}</CardDeck>)
+        let deck = await cards.slice(i, i+3)
+        seed.push(<CardDeck>{deck}</CardDeck>)
     }
     return seed
 }
 
-export function Section(year){
+export async function Section(year){
+    const prova = await Seeder()
     ReactDOM.render(
     <div>
         <DefaultNav />
-        <Seeder />
+        {prova}
     </div>,
     document.getElementById('root')
     );
