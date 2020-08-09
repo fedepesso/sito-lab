@@ -7,10 +7,9 @@ import {DefaultNav} from './index.js'
 import {Viewer} from './viewer.js'
 
 async function get_list(){
-    let list = await fetch(`/api/collect-protocol`)
-                    .then(data => data.json())
-                    .then(success => success.protocols);
-    return list
+    return fetch(`/api/collect-preview`)
+        .then(data => data.json())
+        .then(success => success.protocols);
 }
 
 
@@ -24,7 +23,7 @@ async function Seeder(tipo){
                     <Card.Text Style='font-size: 18px'>
                     {e.descrizione}
                     </Card.Text>
-                    <Button variant="danger" Style='font-size:15px' onClick={Viewer}>Visualizza il protoccolo di Laboratorio</Button>
+                    <Button variant="danger" Style='font-size:15px' onClick={Viewer}>Visualizza il protocollo di Laboratorio</Button>
                 </Card.Body>
                 <Card.Footer>
                     Esperienza pensata per classi di {e.classe}
@@ -34,14 +33,14 @@ async function Seeder(tipo){
 
     let seed =[]
     for(let i = 0; i<cards.length; i+=3){
-        let deck = await cards.slice(i, i+3)
+        let deck = cards.slice(i, i+3)
         seed.push(<CardDeck>{deck}</CardDeck>)
     }
     return seed
 }
 
-export async function Section(year){
-    const prova = await Seeder()
+export function Section(year){
+    const prova = Seeder()
     ReactDOM.render(
     <div>
         <DefaultNav />
