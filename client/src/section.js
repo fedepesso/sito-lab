@@ -7,9 +7,10 @@ import {DefaultNav} from './index.js'
 import {Viewer} from './viewer.js'
 
 async function get_list(){
-    return fetch(`/api/collect-preview`)
+    const list = await fetch(`/api/collect-preview`)
         .then(data => data.json())
         .then(success => success.protocols);
+    return list
 }
 
 
@@ -40,11 +41,11 @@ async function Seeder(tipo){
 }
 
 export function Section(year){
-    const prova = Seeder()
+    const card_list = Seeder()
     ReactDOM.render(
     <div>
         <DefaultNav />
-        {prova}
+        {card_list}
     </div>,
     document.getElementById('root')
     );

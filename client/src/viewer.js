@@ -7,9 +7,10 @@ import {Section} from './section.js'
 import {DefaultNav} from './index.js'
 
 async function get_protocol(){
-    return fetch(`/api/collect-protocol`)
+    const data = await fetch(`/api/collect-protocol`)
         .then(data => data.json())
         .then(success => success.data);
+    return data
 }
 
 const template_format = function(protocol){
@@ -45,7 +46,7 @@ export async function Viewer(){
         <div Style="color : white; text-align : center;">
             <DefaultNav />
             <br></br>
-            template_format(protocol_data)
+            <template_format protocol={protocol_data} />
             <br></br>
             <Button variant="info" Style='font-size:15px' onClick={Section}>Home</Button>
         </div>,
