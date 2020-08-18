@@ -34,7 +34,7 @@ async function Seeder(tipo){
 
     let seed =[]
     for(let i = 0; i<cards.length; i+=3){
-        let deck = cards.slice(i, i+3)
+        let deck = await cards.slice(i, i+3)
         seed.push(<CardDeck>{deck}</CardDeck>)
     }
     return seed
