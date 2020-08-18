@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, CardDeck } from 'react-bootstrap';
-import './index.css';
-import {DefaultNav} from './index.js'
-import {Viewer} from './viewer.js'
+import './style.css';
+import { DefaultNav } from './navbar.js'
+import { Viewer } from './viewer.js'
+
 
 async function get_list(){
     const list = await fetch(`/api/collect-preview`)
@@ -14,20 +15,20 @@ async function get_list(){
 }
 
 
-async function Seeder(tipo){
+async function PreviewRenderer(){
     const list = await get_list()
     let cards = await list.map((e) => {
         return(
             <Card Style='margin: 60px 30px 0px 30px'>
                 <Card.Body>
-                    <Card.Title Style='font-size: 35px'>{e.titolo}</Card.Title>
+                    <Card.Title Style='font-size: 35px'>{e.Titolo}</Card.Title>
                     <Card.Text Style='font-size: 18px'>
-                    {e.descrizione}
+                    {e.Preview}
                     </Card.Text>
                     <Button variant="danger" Style='font-size:15px' onClick={Viewer}>Visualizza il protocollo di Laboratorio</Button>
                 </Card.Body>
                 <Card.Footer>
-                    Esperienza pensata per classi di {e.classe}
+                    Esperienza pensata per classi di {e.Classe}
                 </Card.Footer>
             </Card>)
     })
@@ -40,8 +41,9 @@ async function Seeder(tipo){
     return seed
 }
 
+
 export async function Section(year){
-    const card_list = await Seeder()
+    const card_list = await PreviewRenderer()
     ReactDOM.render(
     <div>
         <DefaultNav />

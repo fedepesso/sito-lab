@@ -1,95 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, Navbar, Card, Button, CardDeck } from 'react-bootstrap';
-import './index.css';
-import {Home} from './home.js'
-
-const list = [
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Prima', id:0},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Seconda', id:1},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Terza', id:2},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quarta', id:3},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quinta', id:4},
-  
-]
-
-// la costante list dovra' essere sostuita dal risultato di una chiamata al db
+import { Button } from 'react-bootstrap';
+import { DefaultNav } from './navbar.js'
+import { Section } from './section.js';
 
 
-const Seeder = (tipo) => {
-  let res = list.map((e,i) => {
-    return (
-      <Card Style='margin: 60px 30px 0px 30px'>
-        <Card.Body>
-          <Card.Title Style='font-size: 35px'>{e.titolo}</Card.Title>
-          <Card.Text Style='font-size: 18px'>
-            {e.descrizione}
-          </Card.Text>
-          <Button variant="danger" Style='font-size:15px' onClick={Raid}>Visualizza il protoccolo di Laboratorio</Button>
-        </Card.Body>
-        <Card.Footer>
-          Esperienza pensata per classi di {e.classe}
-        </Card.Footer>
-      </Card>)
-  })
-
-  let seed =[]
-  for(let i = 0; i<res.length; i+=3){
-    let deck = res.slice(i, i+3)
-    seed.push(<CardDeck>{deck}</CardDeck>)
-  }
-  return seed
-}
-
-
-
-function App() {
-  return (
-    <div className="App">
-      <Seeder />
-    </div>
-  );
-}
-
-
-export function DefaultNav() {
-  return (
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" Style='margin : 0px 0px 0px 0px'>
-      <Navbar.Brand href="#home">Esperienze di Laboratorio</Navbar.Brand>
-      <Nav className="mr-auto">
-        <Nav.Link href="#features">Primo anno</Nav.Link>
-        <Nav.Link href="#features">Secondo anno</Nav.Link>
-        <Nav.Link href="#features">Terzo anno</Nav.Link>
-        <Nav.Link href="#features">Quarto anno</Nav.Link>
-        <Nav.Link href="#features">Quinto anno</Nav.Link>
-      </Nav>
-    </Navbar>)
-}
-
-
-
-function Raid(){
-    fetch(`/api/test`)
-        .then(data => data.json())
-        .then(success => {
-            ReactDOM.render(
-                <div Style="color : white; text-align : center">
-                    {success.data}
-                    <br></br>
-                    <Button variant="info" Style='font-size:15px' onClick={Section}>Home</Button>
-                </div>,
-                document.getElementById('root')
-            )
-            console.log(success.data)
-        });
-}
-
-function Section(){
+export const Home = function (){
     ReactDOM.render(
     <div>
         <DefaultNav />
-        <App />
+        <div Style='text-align:center'>
+            <div Style="margin: 60px 30px; color: white;">
+            On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; 
+            and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. 
+            These cases are perfectly simple and easy to distinguish. 
+            In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. 
+            But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. 
+            The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.
+            </div>
+            <Button variant="danger" Style='font-size:15px' onClick={Section}>Visualizza il protocollo di Laboratorio</Button>
+        </div>
     </div>,
     document.getElementById('root')
     );

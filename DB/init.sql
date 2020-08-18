@@ -1,17 +1,16 @@
 CREATE DATABASE lab_db;
-
---create user admin for login ##password##
+USE lab_db;
 
 CREATE TABLE DataList (
-    ID char(128) NOT NULL,
-    Classe int NOT NULL,
-    Titolo TEXT NOT NULL,
-    Preview TEXT NOT NULL,
+    ID varchar(16) NOT NULL,
+    Classe varchar(256) NOT NULL,
+    Titolo varchar(256) NOT NULL,
+    Preview varchar(2048) NOT NULL,
     PRIMARY KEY (ID)
-)
+);
 
 CREATE TABLE DataContent (
-    ID char(128) NOT NULL,
+    ID varchar(16) NOT NULL,
     Scopo TEXT,
     Materiali TEXT,
     Procedimento TEXT,

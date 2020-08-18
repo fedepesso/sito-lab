@@ -14,7 +14,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "express-pino-logger": "^5.0.0"
+    "express-pino-logger": "^5.0.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.2"

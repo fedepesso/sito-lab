@@ -8,4 +8,8 @@ body {
   background: #222222 !important;
 }
 
+ul {
+  list-style-type: none;
+}
+
 /* qui ho scritto solo il background, sorry per l'important*/

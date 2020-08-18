@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button} from 'react-bootstrap';
-import './index.css';
-import {Section} from './section.js'
-import {DefaultNav} from './index.js'
+import { Button } from 'react-bootstrap';
+import './style.css';
+import { DefaultNav } from './navbar.js'
+import { Home } from './index.js'
 
 async function get_protocol(){
     const data = await fetch(`/api/collect-protocol`)
@@ -13,29 +13,29 @@ async function get_protocol(){
     return data
 }
 
-const template_format = function(protocol){
+const TemplateFormat = function(props){
     return(
         <div Style='margin : 60px 0px'>
-            <h1 Style='text-align: center'>{protocol.title}</h1>
+            <h1 Style='text-align: center'>{props.titolo}</h1>
             <br></br>
-            <ol Style='text-align: left; color : white;'>
+            <ul Style='text-align: left; color: white;'>
                 <li>
-                    <h2><b>1. Scopo dell'esperimento</b></h2>
-                    <p>{protocol.scopo}</p>
+                    <h2><b>Scopo dell'esperimento</b></h2>
+                    <p>{props.scopo}</p>
                 </li>
                 <li>
-                    <h2><b>2. Materiali</b></h2>
-                    <p>{protocol.materiali}</p>
+                    <h2><b>Materiali</b></h2>
+                    <p>{props.materiali}</p>
                 </li>
                 <li>
-                    <h2><b>3. Procedimento</b></h2>
-                    <p>{protocol.procedimento}</p>
+                    <h2><b>Procedimento</b></h2>
+                    <p>{props.procedimento}</p>
                 </li>
                 <li>
-                    <h2><b>4. Conclusioni</b></h2>
-                    <p>{protocol.riflessioni}</p>
+                    <h2><b>Conclusioni</b></h2>
+                    <p>{props.riflessioni}</p>
                 </li>
-            </ol>
+            </ul>
         </div>
     )
 }
@@ -46,9 +46,15 @@ export async function Viewer(){
         <div Style="color : white; text-align : center;">
             <DefaultNav />
             <br></br>
-            <template_format protocol={protocol_data} />
+            <TemplateFormat
+                titolo={protocol_data.Titolo}
+                scopo={protocol_data.Scopo}
+                materiali={protocol_data.Materiali}
+                procedimento={protocol_data.Procedimento}
+                riflessioni={protocol_data.Riflessioni}
+             />
             <br></br>
-            <Button variant="info" Style='font-size:15px' onClick={Section}>Home</Button>
+            <Button variant="info" Style='font-size:15px' onClick={Home}>Home</Button>
         </div>,
         document.getElementById('root')
     )

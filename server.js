@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const mysql = require('mysql');
 const pino = require('express-pino-logger')()
 
 const app = express()
@@ -12,6 +13,13 @@ const parse_array = function(raw_string) {
   return raw_string.split('-')
 }
 
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "lab_db"
+});
+
 app.get('/api/test', (req, res) => {
   const data = "Lorem ipsum dolor sit amet, consectetur adipiscing elit" 
   res.setHeader('Content-Type', 'application/json')
@@ -19,32 +27,26 @@ app.get('/api/test', (req, res) => {
 })
 
 app.get('/api/collect-preview', (req, res) => {
-  // req.body.year
-  // categoria 
-  const protocols = [
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Prima', id:0},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Seconda', id:1},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Terza', id:2},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quarta', id:3},
-  {titolo : 'Lorem Ipsum', descrizione: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', classe: 'Quinta', id:4},
-  ] //risultato query
-  res.setHeader('Content-Type', 'application/json')
-  res.send(JSON.stringify({protocols : protocols}))
+  const year = 'Prima'
+
+  connection.query("SELECT * FROM datalist WHERE Classe = 'Prima';", function (err, result, fields) {
+    if (err) throw err
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify({protocols : result}))
+  })
+  
 })
 
 app.get('/api/collect-protocol', (req, res) => {
-  // req.body.id
-  // id del protocollo
-  const data = {
-    "scopo": "",
-    "materiali": "",
-    "procedimento": "",
-    "riflessioni": "",
-    "elenco_immagini": "",
-    "didascalie_immagini": ""
-  }
-  res.setHeader('Content-Type', 'application/json')
-  res.send(JSON.stringify({data : data}))
+  const id = 'ab1'
+  const query = "SELECT datalist.Titolo, datacontent.Scopo, datacontent.Materiali, datacontent.Procedimento, datacontent.Riflessioni FROM datacontent JOIN datalist ON (datacontent.ID=datalist.ID AND datalist.ID='ab1');"
+
+  connection.query(query, function (err, result, fields) {
+    if (err) throw err
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify({data : result[0]}))
+  })
+
 })
 
 app.listen(port, () =>
