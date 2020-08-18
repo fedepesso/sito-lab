@@ -3,32 +3,38 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, CardDeck } from 'react-bootstrap';
 import './style.css';
-import { DefaultNav } from './navbar.js'
+import { DefaultNav } from './index.js'
 import { Viewer } from './viewer.js'
 
 
-async function get_list(){
-    const list = await fetch(`/api/collect-preview`)
+async function get_list(year){
+    console.log(year)
+    const list = await fetch(`/api/collect-preview?year=${year}`)
         .then(data => data.json())
         .then(success => success.protocols);
     return list
 }
 
 
-async function PreviewRenderer(){
-    const list = await get_list()
+async function PreviewRenderer(year){
+    const list = await get_list(year)
+
+    if (list.length == 0) {
+        // restituire testo che avverte della mancanza di esperimenti memorizzati
+    }
+
     let cards = await list.map((e) => {
         return(
-            <Card Style='margin: 60px 30px 0px 30px'>
+            <Card Style='margin: 60px 30px 0px 30px' border='dark' bg='light'>
                 <Card.Body>
                     <Card.Title Style='font-size: 35px'>{e.Titolo}</Card.Title>
                     <Card.Text Style='font-size: 18px'>
                     {e.Preview}
                     </Card.Text>
-                    <Button variant="danger" Style='font-size:15px' onClick={Viewer}>Visualizza il protocollo di Laboratorio</Button>
+                    <Button variant="dark" Style='font-size:15px' onClick={() => Viewer(e.ID)}>Visualizza il protocollo di Laboratorio</Button>
                 </Card.Body>
                 <Card.Footer>
-                    Esperienza pensata per classi di {e.Classe}
+                    Esperienza pensata per classi di {e.Classe.toLowerCase()}
                 </Card.Footer>
             </Card>)
     })
@@ -43,11 +49,11 @@ async function PreviewRenderer(){
 
 
 export async function Section(year){
-    const card_list = await PreviewRenderer()
+    const card_list = await PreviewRenderer(year)
     ReactDOM.render(
     <div>
         <DefaultNav />
-        {card_list}
+        <div class='content_wrapper'>{card_list}</div>
     </div>,
     document.getElementById('root')
     );

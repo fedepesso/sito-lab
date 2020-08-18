@@ -1,12 +1,11 @@
 const express = require('express')
-const bodyParser = require('body-parser')
+const url = require('url');
 const mysql = require('mysql');
 const pino = require('express-pino-logger')()
 
 const app = express()
 const port = process.env.PORT || 5000;
 
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(pino)
 
 const parse_array = function(raw_string) {
@@ -27,9 +26,10 @@ app.get('/api/test', (req, res) => {
 })
 
 app.get('/api/collect-preview', (req, res) => {
-  const year = 'Prima'
+  const year = url.parse(req.url, true).query.year
+  const query = `SELECT * FROM datalist WHERE Classe = ${connection.escape(year)};`
 
-  connection.query("SELECT * FROM datalist WHERE Classe = 'Prima';", function (err, result, fields) {
+  connection.query(query, function (err, result, fields) {
     if (err) throw err
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({protocols : result}))
@@ -38,11 +38,13 @@ app.get('/api/collect-preview', (req, res) => {
 })
 
 app.get('/api/collect-protocol', (req, res) => {
-  const id = 'ab1'
-  const query = "SELECT datalist.Titolo, datacontent.Scopo, datacontent.Materiali, datacontent.Procedimento, datacontent.Riflessioni FROM datacontent JOIN datalist ON (datacontent.ID=datalist.ID AND datalist.ID='ab1');"
+  const id = url.parse(req.url, true).query.id
+  const query = `SELECT datalist.Titolo, datacontent.Scopo, datacontent.Materiali, datacontent.Procedimento, datacontent.Riflessioni FROM datacontent JOIN datalist ON datacontent.ID=datalist.ID WHERE datalist.ID=${connection.escape(id)};`
+  console.log(query)
 
   connection.query(query, function (err, result, fields) {
     if (err) throw err
+    console.log(result[0])
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({data : result[0]}))
   })

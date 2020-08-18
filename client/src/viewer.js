@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import './style.css';
-import { DefaultNav } from './navbar.js'
-import { Home } from './index.js'
+import { DefaultNav } from './index.js'
 
-async function get_protocol(){
-    const data = await fetch(`/api/collect-protocol`)
+async function get_protocol(id){
+    const data = await fetch(`/api/collect-protocol?id=${id}`)
         .then(data => data.json())
         .then(success => success.data);
     return data
@@ -40,21 +38,22 @@ const TemplateFormat = function(props){
     )
 }
 
-export async function Viewer(){
-    const protocol_data = await get_protocol()
+export async function Viewer(id){
+    const protocol_data = await get_protocol(id)
     ReactDOM.render(
         <div Style="color : white; text-align : center;">
             <DefaultNav />
-            <br></br>
-            <TemplateFormat
-                titolo={protocol_data.Titolo}
-                scopo={protocol_data.Scopo}
-                materiali={protocol_data.Materiali}
-                procedimento={protocol_data.Procedimento}
-                riflessioni={protocol_data.Riflessioni}
-             />
-            <br></br>
-            <Button variant="info" Style='font-size:15px' onClick={Home}>Home</Button>
+            <div class='content_wrapper'>
+                <div class='{card_list}'>
+                    <TemplateFormat
+                        titolo={protocol_data.Titolo}
+                        scopo={protocol_data.Scopo}
+                        materiali={protocol_data.Materiali}
+                        procedimento={protocol_data.Procedimento}
+                        riflessioni={protocol_data.Riflessioni}
+                    />
+                </div>
+            </div>
         </div>,
         document.getElementById('root')
     )
