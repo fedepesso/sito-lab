@@ -40,8 +40,8 @@ async function Seeder(tipo){
     return seed
 }
 
-export function Section(year){
-    const card_list = Seeder()
+export async function Section(year){
+    const card_list = await Seeder()
     ReactDOM.render(
     <div>
         <DefaultNav />
