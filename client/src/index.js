@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Nav, Navbar} from 'react-bootstrap';
-import { Section } from './section.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Nav, Navbar} from 'react-bootstrap'
+import { Section } from './section.js'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Homepage = function(){
     return(

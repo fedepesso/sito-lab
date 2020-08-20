@@ -7,14 +7,18 @@
   },
   "scripts": {
     "client": "cd client && npm start",
+    "panel": "cd admin_panel && npm start",
     "server": "npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "admin": "concurrently --kill-others-on-fail \"npm run server\" \"npm run panel\"",
     "setup": "npm install && (cd client && npm install)"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-pino-logger": "^5.0.0",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
