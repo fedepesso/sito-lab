@@ -1,18 +1,63 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 import { Editor } from '@tinymce/tinymce-react';
+import { Button } from 'react-bootstrap'
 import './style.css';
 
-let storeData = (text) => console.log(text)
+const Protocol = {
+    scopo : null,
+    materiali : null,
+    procedimento : null,
+    conclusioni : null
+}
+
+async function Magic() {
+    console.log(Protocol)
+    for (let key in Protocol) {
+        let value = Protocol[key]
+        if(value === null){
+            //avverti che c'e' stato un errore e bisogna ricaricare la pagina perche' si e' deficienti
+            return 0
+        }
+    }
+    const risposta = await fetch(`/admin/add_protocol/?proto=${Protocol}`)
+        .then(data => data.json())
+        .then(success => success.protocols);
+
+    console.log(risposta.data)
+
+}
+
+const cambi = {
+    0 : 'scopo',
+    1 : 'materiali',
+    2 : 'procedimento',
+    3 : 'conclusioni',
+    4 : Magic()
+}
+
+let numeromagico = 0
+
+const storeData = (text) => {
+    Protocol[cambi[numeromagico]] = text
+}
 
 
-const Edit = function() {
-    ReactDOM.render(
+
+const Submit = () => {
+    if(Protocol[cambi[numeromagico]] === null && Protocol[cambi[numeromagico]] !== ''){
+        return 0
+    }
+    numeromagico+=1
+}
+
+export const Edit = function() {
+    return(
         <div>
             <Editor
+            apiKey='u4ullmdufa5codrn125ecos31qc75qh7d786l2pj6u310ggq'
             initialValue="<p>This is the initial content of the editor</p>"
             init={{
-            height: 1000,
+            height: 750,
             menubar: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
@@ -24,9 +69,7 @@ const Edit = function() {
             }}
             onEditorChange={storeData}
         />
-        </div>,
-    document.getElementById('root')
-)
+        <Button variant="primary" type="submit" onClick={Submit}> Invia </Button>
+        </div>
+    )
 }
-
-Edit()

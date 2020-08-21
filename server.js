@@ -55,6 +55,13 @@ app.get('/admin/validate_user', (req, res) => {
   const pwd = url.parse(req.url, true).query.pwd
 })
 
+app.get('/admin/add_protocol', (req, res) => {
+  const Protocol = url.parse(req.url, true).query.proto
+  let result = 'ciao tutto bene qui'
+  res.setHeader('Content-Type', 'application/json')
+  res.send(JSON.stringify({data : result}))
+})
+
 app.listen(port, () =>
   console.log(`Express server is running on ${port}`)
 )

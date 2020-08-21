@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Form, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
+import {Edit} from './Editor.js'
 
 
 const Authentication = function() {
@@ -23,6 +24,7 @@ const Authentication = function() {
         
         <Button variant="primary" type="submit" onclick={validate_user}>Effettua l'accesso</Button>
       </Form>
+      <Edit />
     </div>,
   document.getElementById('root')
   )
