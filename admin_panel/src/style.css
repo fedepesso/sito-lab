@@ -8,9 +8,16 @@ body {
     background: #222222 !important;
 }
 
-.content_wrapper {
-  width: 85%;
-  position: relative;
-  margin: auto;
-  margin-top: 20px;
+#outer-container {
+  height: 100%;
+  margin: 10px;
+}
+
+#page-wrap {
+  margin-left: 15%;
+}
+
+.lateral {
+  margin-top: 10px;
+  margin-left: 5px;
 }
