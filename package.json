@@ -11,9 +11,11 @@
     "server": "npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "admin": "concurrently --kill-others-on-fail \"npm run server\" \"npm run panel\"",
+    "all": "concurrently --kill-others-on-fail \"npm run server\" \"npm run panel\" \"npm run client\"",
     "setup": "npm install && (cd client && npm install)"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^3.6.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-pino-logger": "^5.0.0",

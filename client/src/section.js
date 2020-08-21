@@ -19,7 +19,7 @@ async function get_list(year){
 async function PreviewRenderer(year){
     const list = await get_list(year)
 
-    if (list.length == 0) {
+    if (list.length === 0) {
         // restituire testo che avverte della mancanza di esperimenti memorizzati
     }
 

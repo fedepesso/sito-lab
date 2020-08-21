@@ -4,6 +4,7 @@ import { Form, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
 
+
 const Authentication = function() {
   ReactDOM.render(
     <div class='content_wrapper'>
@@ -30,5 +31,6 @@ const Authentication = function() {
 const validate_user = function() {
   //
 }
+
 
 Authentication()

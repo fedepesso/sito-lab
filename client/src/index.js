@@ -22,7 +22,7 @@ const Homepage = function(){
 export function DefaultNav() {
     return (
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top" class='d-block '>
-          <Navbar.Brand onClick={Home} href='#home'>Esperienze di Laboratorio</Navbar.Brand>
+          <Navbar.Brand onClick={Home}>Esperienze di Laboratorio</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link type='button' onClick={() => Section('Prima')} >Primo anno</Nav.Link>
             <Nav.Link type='button' onClick={() => Section('Seconda')} >Secondo anno</Nav.Link>
