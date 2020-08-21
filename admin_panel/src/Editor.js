@@ -58,7 +58,6 @@ export const Edit = function() {
             initialValue="<p>This is the initial content of the editor</p>"
             init={{
             height: 750,
-            menubar: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',

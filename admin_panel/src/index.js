@@ -4,12 +4,12 @@ import { Form, Button} from 'react-bootstrap'
 import { RenderPanel } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
-import {Edit} from './Editor.js'
+import { Edit } from './Editor.js'
 
 
 const Authentication = function() {
   ReactDOM.render(
-    <div class='content_wrapper'>
+    <div >
       <h2 class="text-light">Pannello di controllo</h2>
       <p class="text-light">Inserisci le credenziali d'accesso per accedere al pannello e modificare il contenuto del sito</p>
       <Form>
@@ -26,6 +26,7 @@ const Authentication = function() {
         <Button variant="primary" type="submit" onclick={validate_user}>Effettua l'accesso</Button>
       </Form>
       <Edit />
+      <RenderPanel />
     </div>,
   document.getElementById('root')
   )

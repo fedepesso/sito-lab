@@ -1,13 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Nav, Button, Badge, NavDropdown, ButtonGroup, DropdownButton } from 'react-bootstrap'
+import { Nav, Button, Badge, NavDropdown, DropdownButton } from 'react-bootstrap'
 import { scaleRotate as Menu } from 'react-burger-menu'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
 
 const Sidebar = function() {
     return (
-        <>
+        <div>
             <Button onclick={() => {document.getElementById('menu_container').open()}}>Menu</Button>
             <Menu pageWrapId={"page-wrap" } outerContainerId={ "outer-container" } id={'menu_container'} style={{'margin': '10px'}} width={'25%'}>
                 <Nav defaultActiveKey="" className="flex-column">
@@ -21,12 +20,12 @@ const Sidebar = function() {
                     </DropdownButton>
                 </Nav>
             </Menu>
-        </>
+        </div>
     )
 }
 
 export const RenderPanel = function() {
-    ReactDOM.render(
+    return(
     <div id={'outer-container'} class='text-light'>
         <Sidebar />
         <div id={'page-wrap'}>
@@ -37,6 +36,5 @@ export const RenderPanel = function() {
             <h5>Example heading <Badge variant="secondary">New</Badge></h5>
             <h6>Example heading <Badge variant="secondary">New</Badge></h6>
         </div>
-    </div>
-    , document.getElementById('root'))
+    </div>)
 }
