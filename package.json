@@ -15,7 +15,6 @@
     "setup": "npm install && (cd client && npm install)"
   },
   "dependencies": {
-    "@tinymce/tinymce-react": "^3.6.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-pino-logger": "^5.0.0",

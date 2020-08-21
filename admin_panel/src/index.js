@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Form, Button} from 'react-bootstrap'
+import { RenderPanel } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
 import {Edit} from './Editor.js'
