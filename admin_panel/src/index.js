@@ -4,7 +4,7 @@ import { Form, Button} from 'react-bootstrap'
 import { RenderPanel } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
-import { Edit } from './Editor.js'
+import { Edit } from './editor.js'
 
 
 const Authentication = function() {
