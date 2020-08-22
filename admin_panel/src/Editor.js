@@ -79,3 +79,7 @@ export const Edit = function() {
         </div>
     )
 }
+
+export const EditWizard = function(id=undefined) {
+    Edit()
+}
