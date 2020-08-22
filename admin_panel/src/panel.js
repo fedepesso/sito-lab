@@ -25,7 +25,7 @@ const Sidebar = function() {
 }
 
 export const RenderPanel = function() {
-    return(
+    ReactDOM.render(
     <div id={'outer-container'} class='text-light'>
         <Sidebar />
         <div id={'page-wrap'}>
@@ -36,5 +36,6 @@ export const RenderPanel = function() {
             <h5>Example heading <Badge variant="secondary">New</Badge></h5>
             <h6>Example heading <Badge variant="secondary">New</Badge></h6>
         </div>
-    </div>)
+    </div>, 
+    document.getElementById('root'))
 }
