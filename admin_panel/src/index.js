@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Form, Button} from 'react-bootstrap'
-import { RenderPanel } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
-import { Edit } from './editor.js'
 
 
 const Authentication = function() {
@@ -25,10 +23,8 @@ const Authentication = function() {
         
         <Button variant="primary" type="submit" onclick={validate_user}>Effettua l'accesso</Button>
       </Form>
-      <Edit />
-      <RenderPanel />
     </div>,
-  document.getElementById('root')
+    document.getElementById('root')
   )
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { Nav, Button, Badge, NavDropdown, DropdownButton } from 'react-bootstrap'
 import { scaleRotate as Menu } from 'react-burger-menu'
 import 'bootstrap/dist/css/bootstrap.min.css'

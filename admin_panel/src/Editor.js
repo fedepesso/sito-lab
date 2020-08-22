@@ -5,10 +5,12 @@ import { Button } from 'react-bootstrap'
 import './style.css';
 
 const Protocol = {
+    titolo : null,
     scopo : null,
     materiali : null,
     procedimento : null,
-    conclusioni : null
+    conclusioni : null,
+    preview : null
 }
 
 async function Magic() {
@@ -29,11 +31,13 @@ async function Magic() {
 }
 
 const cambi = {
-    0 : 'scopo',
-    1 : 'materiali',
-    2 : 'procedimento',
-    3 : 'conclusioni',
-    4 : Magic()
+    0 : 'titolo',
+    1 : 'scopo',
+    2 : 'materiali',
+    3 : 'procedimento',
+    4 : 'conclusioni',
+    5 : 'previw',
+    6 : Magic()
 }
 
 let numeromagico = 0
