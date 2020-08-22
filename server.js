@@ -41,7 +41,7 @@ app.get('/api/collect-preview', (req, res) => {
 
 app.get('/api/collect-protocol', (req, res) => {
   const id = url.parse(req.url, true).query.id
-  const query = `SELECT datalist.Titolo, datacontent.Scopo, datacontent.Materiali, datacontent.Procedimento, datacontent.Riflessioni FROM datacontent JOIN datalist ON datacontent.ID=datalist.ID WHERE datalist.ID=${connection.escape(id)};`
+  const query = `SELECT datalist.Titolo, datalist.Preview, datacontent.Scopo, datacontent.Materiali, datacontent.Procedimento, datacontent.Riflessioni FROM datacontent JOIN datalist ON datacontent.ID=datalist.ID WHERE datalist.ID=${connection.escape(id)};`
 
   connection.query(query, function (err, result, fields) {
     if (err) throw err
@@ -55,11 +55,19 @@ app.get('/admin/validate_user', (req, res) => {
   const pwd = url.parse(req.url, true).query.pwd
 })
 
-app.get('/admin/add_protocol', (req, res) => {
-  const Protocol = url.parse(req.url, true).query.proto
-  let result = 'ciao tutto bene qui'
+app.post('/admin/add_protocol', (req, res) => {
+  const protocol = url.parse(req.url, true).query.proto
+  protocol.id = 'dfghjk' // usare funzione hash che tenga in considerazione l'orario di caricamento
   res.setHeader('Content-Type', 'application/json')
-  res.send(JSON.stringify({data : result}))
+  res.send(JSON.stringify({data : 'ciao tutto bene qui'}))
+})
+
+app.post('/admin/remove_protocol', (req, res) => {
+  const id = url.parse(req.url, true).query.id
+  connection.query('///', function (err, result, fields) {
+    if (err) throw err
+    //
+  })
 })
 
 app.listen(port, () =>

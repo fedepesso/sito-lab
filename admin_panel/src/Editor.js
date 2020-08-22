@@ -1,89 +1,143 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { Editor } from '@tinymce/tinymce-react';
-import { Button } from 'react-bootstrap'
+import { Button, Nav, Badge, Form } from 'react-bootstrap'
 import './style.css';
-
-const Protocol = {
-    titolo : null,
-    scopo : null,
-    materiali : null,
-    procedimento : null,
-    conclusioni : null,
-    preview : null
-}
-
-async function Magic() {
-    console.log(Protocol)
-    for (let key in Protocol) {
-        let value = Protocol[key]
-        if(value === null){
-            //avverti che c'e' stato un errore e bisogna ricaricare la pagina perche' si e' deficienti
-            return 0
-        }
-    }
-    const risposta = await fetch(`/admin/add_protocol/?proto=${Protocol}`)
-        .then(data => data.json())
-        .then(success => success.protocols);
-
-    console.log(risposta.data)
-
-}
-
+let Protocol = null // l'assegnazione avviene quando viene chiamato WizardEdit e la variabile ritorna null alla fine del ciclo
+let numeromagico = 0
 const cambi = {
-    0 : 'titolo',
+    0 : 'anteprima',
     1 : 'scopo',
     2 : 'materiali',
     3 : 'procedimento',
     4 : 'conclusioni',
-    5 : 'previw',
-    6 : Magic()
+    5 : Magic
 }
 
-let numeromagico = 0
-
-const storeData = (text) => {
-    Protocol[cambi[numeromagico]] = text
+async function get_protocol(id){
+    const data = await fetch(`/api/collect-protocol?id=${id}`)
+        .then(data => data.json())
+        .then(success => success.data);
+    return data
 }
 
-
-
-const Submit = () => {
-    if(Protocol[cambi[numeromagico]] === null && Protocol[cambi[numeromagico]] !== ''){
-        return 0
+export const EditWizard = async function(id=undefined) {
+    numeromagico = -1
+    if (id == undefined) {
+        Protocol = {
+            titolo : '',
+            anteprima : '',
+            scopo : '',
+            materiali : '',
+            procedimento : '',
+            conclusioni : ''
+        }
     }
-    numeromagico+=1
+    else { 
+        const protocol_data = await get_protocol(id)
+        Protocol = {
+            titolo : protocol_data.Titolo,
+            anteprima : protocol_data.Anteprima,
+            scopo : protocol_data.Scopo,
+            materiali : protocol_data.Materiali,
+            procedimento : protocol_data.Procedimento,
+            conclusioni : protocol_data.Riflessioni
+        }
+    }
+
+    Submit(1)
+}
+
+const Submit = (delta) => {
+    numeromagico+=delta
+    if (numeromagico >= 4) {
+        document.getElementById('upload_button').disabled = false
+        numeromagico = 4
+    }
+    if (numeromagico < 0) {
+        numeromagico = 0
+    }
+    
     ReactDOM.render(
-        <div >
-          <Edit />
-        </div>,
-      document.getElementById('root')
-    )
-}
-
-export const Edit = function() {
-    return(
         <div>
-            <Editor
-            apiKey='u4ullmdufa5codrn125ecos31qc75qh7d786l2pj6u310ggq'
-            initialValue="<p>This is how legends are made</p>"
-            init={{
-            height: 750,
-            plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-            ],
-            toolbar:
-                'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
-            }}
-            onEditorChange={storeData}
-        />
-        <Button variant="primary" type="submit" onClick={Submit}> Invia </Button>
-        </div>
+            <Edit default_value={Protocol[cambi[numeromagico]]} />
+        </div>,
+        document.getElementById('root')
     )
 }
 
-export const EditWizard = function(id=undefined) {
-    Edit()
+class Edit extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {content: ''}
+    }
+
+    handleEditorChange(content) {
+        Protocol[cambi[numeromagico]] = content
+    }
+
+    render() {
+        let render_value;
+        if (this.props.default_value === undefined) {
+            render_value = ''
+        } 
+        else {
+            render_value = this.props.default_value
+        }
+        this.state.content = render_value
+        return(
+            <div className='wrapper'>
+                <Nav as="ul">
+                    <Form style={{'margin': '10px'}}>
+                        <Form.Group controlId="formTitolo">
+                            <Form.Control placeholder="Titolo" />
+                        </Form.Group>
+                    </Form>
+                    <Form style={{'margin': '10px'}}>
+                        <Form.Group controlId="formClasse">
+                            <Form.Control as="select">
+                            <option>Prima</option>
+                            <option>Seconda</option>
+                            <option>Terza</option>
+                            <option>Quarta</option>
+                            <option>Quinta</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Form>
+                    <Nav.Item as="li">
+                        <Button variant="primary" type="submit" onClick={() => {Submit(-1)}} variant='outline-light' style={{'margin': '10px'}}> Indietro </Button>
+                    </Nav.Item>
+                    <Nav.Item as="li">
+                        <Button variant="primary" type="submit" onClick={() => {Submit(1)}} variant='outline-light' style={{'margin': '10px'}}> Avanti </Button>
+                    </Nav.Item>
+                    <Nav.Item as="li">
+                        <Badge  className='text-light' style={{'margin-right': '10px'}, {'marginTop': '20px'}} variant='info'>Stai modificando: {cambi[numeromagico]}</Badge >
+                    </Nav.Item>
+                    <Nav.Item as="li">
+                        <Button variant="primary" type="submit" onClick={Magic} variant='outline-light' style={{'margin': '10px'}} disabled id='upload_button'> Carica </Button>
+                    </Nav.Item>
+                </Nav>
+                <div style={{'margin': '10px'}}>
+                    <Editor
+                    value={this.state.content}
+                    apiKey='u4ullmdufa5codrn125ecos31qc75qh7d786l2pj6u310ggq'
+                    init={{
+                    height: 750,
+                    toolbar:
+                        'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+                    }}
+                    onEditorChange={this.handleEditorChange}
+                    />
+                </div>
+            </div>
+        )
+    }
+}
+
+async function Magic() {
+    console.log(Protocol)
+    // aggiungere titolo e classe contenuti nei form
+    fetch(`/admin/add_protocol/?proto=${Protocol}`)
+        .then(data => data.json())
+        .then(success => console.log(success.data));
 }
