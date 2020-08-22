@@ -24,7 +24,7 @@ const Authentication = function() {
         <Button variant="primary" type="submit" onclick={validate_user}>Effettua l'accesso</Button>
       </Form>
     </div>,
-  document.getElementById('root')
+    document.getElementById('root')
   )
 }
 
