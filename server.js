@@ -55,19 +55,16 @@ app.get('/admin/validate_user', (req, res) => {
   const pwd = url.parse(req.url, true).query.pwd
 })
 
-app.post('/admin/add_protocol', (req, res) => {
+app.get('/api/add-protocol', (req, res) => {
   const protocol = url.parse(req.url, true).query.proto
-  protocol.id = 'dfghjk' // usare funzione hash che tenga in considerazione l'orario di caricamento
   res.setHeader('Content-Type', 'application/json')
   res.send(JSON.stringify({data : 'ciao tutto bene qui'}))
 })
 
-app.post('/admin/remove_protocol', (req, res) => {
+app.get('/api/remove_protocol', (req, res) => {
   const id = url.parse(req.url, true).query.id
-  connection.query('///', function (err, result, fields) {
-    if (err) throw err
-    //
-  })
+  res.setHeader('Content-Type', 'application/json')
+  res.send(JSON.stringify({data : `ciao tutto bene qui ${id}`}))
 })
 
 app.listen(port, () =>

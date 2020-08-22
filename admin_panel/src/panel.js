@@ -28,7 +28,7 @@ const Sidebar = function() {
 
 export const RenderPanelHomepage = function() {
     ReactDOM.render(
-    <div id={'outer-container'} class='text-light'>
+    <div id={'outer-container'} className='text-light'>
         <Sidebar />
         <div id={'page-wrap'} className='wrapper'>
             <p>

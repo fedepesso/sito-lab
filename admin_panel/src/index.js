@@ -4,13 +4,14 @@ import { Form, Button} from 'react-bootstrap'
 import { RenderPanelHomepage } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
+import { Annual_Modification } from './annual.js'
 
 
 const Authentication = function() {
   ReactDOM.render(
     <div className='authentication'>
-      <h2 class="text-light">Pannello di controllo</h2>
-      <p class="text-light">Inserisci le credenziali d'accesso per accedere al pannello e modificare il contenuto del sito</p>
+      <h2 className="text-light">Pannello di controllo</h2>
+      <p className="text-light">Inserisci le credenziali d'accesso per accedere al pannello e modificare il contenuto del sito</p>
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Control type="email" placeholder="Inserisci il nome utente" />
@@ -20,7 +21,7 @@ const Authentication = function() {
           <Form.Control type="password" placeholder="Inserisci la password" />
         </Form.Group>
         
-        <Button variant="primary" type="submit" onclick={validate_user}> Effettua l'accesso </Button>
+        <Button variant="primary" type="submit" onClick={validate_user}> Effettua l'accesso </Button>
       </Form>
     </div>,
     document.getElementById('root')
@@ -29,8 +30,8 @@ const Authentication = function() {
 
 const validate_user = function() {
   // fare un controllo effettivo delle credenziali
-  RenderPanelHomepage()
 }
 
-
 Authentication()
+RenderPanelHomepage()
+Annual_Modification('Prima')

@@ -8,7 +8,6 @@ import { Viewer } from './viewer.js'
 
 
 async function get_list(year){
-    console.log(year)
     const list = await fetch(`/api/collect-preview?year=${year}`)
         .then(data => data.json())
         .then(success => success.protocols);

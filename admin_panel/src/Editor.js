@@ -23,7 +23,7 @@ async function get_protocol(id){
 
 export const EditWizard = async function(id=undefined) {
     numeromagico = -1
-    if (id == undefined) {
+    if (id === undefined) {
         Protocol = {
             titolo : '',
             anteprima : '',
@@ -57,7 +57,6 @@ const Submit = (delta) => {
     if (numeromagico < 0) {
         numeromagico = 0
     }
-    
     ReactDOM.render(
         <div>
             <Edit default_value={Protocol[cambi[numeromagico]]} />
@@ -84,7 +83,7 @@ class Edit extends React.Component {
         else {
             render_value = this.props.default_value
         }
-        this.state.content = render_value
+        this.setState.content = render_value
         return(
             <div className='wrapper'>
                 <Nav as="ul">
@@ -105,16 +104,16 @@ class Edit extends React.Component {
                         </Form.Group>
                     </Form>
                     <Nav.Item as="li">
-                        <Button variant="primary" type="submit" onClick={() => {Submit(-1)}} variant='outline-light' style={{'margin': '10px'}}> Indietro </Button>
+                        <Button variant="outline-light" type="submit" onClick={() => {Submit(-1)}} style={{'margin': '10px'}}> Indietro </Button>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Button variant="primary" type="submit" onClick={() => {Submit(1)}} variant='outline-light' style={{'margin': '10px'}}> Avanti </Button>
+                        <Button variant="outline-light" type="submit" onClick={() => {Submit(1)}} style={{'margin': '10px'}}> Avanti </Button>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Badge  className='text-light' style={{'margin-right': '10px'}, {'marginTop': '20px'}} variant='info'>Stai modificando: {cambi[numeromagico]}</Badge >
+                        <Badge  className='text-light' style={{'marginRight': '10px', 'marginTop': '20px'}} variant='info'>Stai modificando: {cambi[numeromagico]}</Badge >
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Button variant="primary" type="submit" onClick={Magic} variant='outline-light' style={{'margin': '10px'}} disabled id='upload_button'> Carica </Button>
+                        <Button variant="outline-light" type="submit" onClick={()=>{Magic()}} style={{'margin': '10px'}} id='upload_button'> Carica </Button>
                     </Nav.Item>
                 </Nav>
                 <div style={{'margin': '10px'}}>
@@ -136,8 +135,9 @@ class Edit extends React.Component {
 
 async function Magic() {
     console.log(Protocol)
+    console.log('prova')
     // aggiungere titolo e classe contenuti nei form
-    fetch(`/admin/add_protocol/?proto=${Protocol}`)
+    await fetch(`/api/add-protocol?protocol=${Protocol}`)
         .then(data => data.json())
         .then(success => console.log(success.data));
 }
