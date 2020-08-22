@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import { Editor } from '@tinymce/tinymce-react';
 import { Button } from 'react-bootstrap'
 import './style.css';
@@ -48,6 +49,12 @@ const Submit = () => {
         return 0
     }
     numeromagico+=1
+    ReactDOM.render(
+        <div >
+          <Edit />
+        </div>,
+      document.getElementById('root')
+    )
 }
 
 export const Edit = function() {
@@ -55,7 +62,7 @@ export const Edit = function() {
         <div>
             <Editor
             apiKey='u4ullmdufa5codrn125ecos31qc75qh7d786l2pj6u310ggq'
-            initialValue="<p>This is the initial content of the editor</p>"
+            initialValue="<p>This is how legends are made</p>"
             init={{
             height: 750,
             plugins: [
