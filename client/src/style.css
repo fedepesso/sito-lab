@@ -19,3 +19,25 @@ ul {
   margin: auto;
   padding-top: 10px;
 }
+
+.carousel {
+  /* any dimensions are fine, it can be responsive with max-width */
+  width: auto;
+  height: auto;
+}
+
+.carousel-inner {
+  /* make sure your .items will get correct height */
+  height: 100%;
+}
+
+.item {
+  background-size: cover;
+  background-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.item img {
+  visibility: hidden;
+}

@@ -33,7 +33,7 @@ export async function PreviewRenderer(year){
 
     let cards = await list.map((e) => {
         return(
-            <Row Style='margin:20px' key={e.id}>
+            <Row style={{'margin': '20px', 'border-style': 'solid', 'border-width': '1px', 'border-color': '#efefef'}} key={e.id}>
                 <Col Style='color:white' xs={6}>
                     {e.Titolo}
                 </Col>
@@ -44,5 +44,8 @@ export async function PreviewRenderer(year){
             </Row>
         )
     })
-    return (<Container fluid>{cards}</Container>)
+    return (<Container fluid>
+        <h1>Protocolli trovati</h1>
+        {cards}
+        </Container>)
 }

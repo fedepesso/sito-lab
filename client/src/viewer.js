@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import parse from "html-react-parser"
+import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import { DefaultNav } from './index.js'
+import { DefaultNav, Home } from './index.js'
 
 async function get_protocol(id){
     const data = await fetch(`/api/collect-protocol?id=${id}`)
@@ -19,27 +21,29 @@ const TemplateFormat = function(props){
             <ul Style='text-align: left; color: white;'>
                 <li>
                     <h2><b>Scopo dell'esperimento</b></h2>
-                    <p>{props.scopo}</p>
+                    <div>{parse(props.scopo)}</div>
                 </li>
                 <li>
                     <h2><b>Materiali</b></h2>
-                    <p>{props.materiali}</p>
+                    <div>{parse(props.materiali)}</div>
                 </li>
                 <li>
                     <h2><b>Procedimento</b></h2>
-                    <p>{props.procedimento}</p>
+                    <div>{parse(props.procedimento)}</div>
                 </li>
                 <li>
                     <h2><b>Conclusioni</b></h2>
-                    <p>{props.riflessioni}</p>
+                    <div>{parse(props.riflessioni)}</div>
                 </li>
             </ul>
+            <Button onClick={Home} variant='light'>Torna alla homepage</Button>
         </div>
     )
 }
 
 export async function Viewer(id){
     const protocol_data = await get_protocol(id)
+    console.log(protocol_data)
     ReactDOM.render(
         <div Style="color : white; text-align : center;">
             <DefaultNav />

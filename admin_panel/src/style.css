@@ -40,3 +40,9 @@ body {
   border-color: #efefef;
   border-radius: 5px;
 }
+
+@media only screen and (max-width: 960px) {
+  #page-wrap {
+    margin-top: 60px;
+  }
+}

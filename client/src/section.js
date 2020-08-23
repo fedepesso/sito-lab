@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Button, CardDeck } from 'react-bootstrap';
+import parse from "html-react-parser"
 import './style.css';
 import { DefaultNav } from './index.js'
 import { Viewer } from './viewer.js'
@@ -28,9 +29,9 @@ async function PreviewRenderer(year){
                 <Card.Body>
                     <Card.Title Style='font-size: 35px'>{e.Titolo}</Card.Title>
                     <Card.Text Style='font-size: 18px'>
-                    {e.Preview}
+                    <div>{parse(e.Preview)}</div>
                     </Card.Text>
-                    <Button variant="dark" Style='font-size:15px' onClick={() => Viewer(e.ID)}>Visualizza il protocollo di Laboratorio</Button>
+                    <Button variant="dark" Style='font-size:15px' onClick={() => Viewer(e.id)}>Visualizza il protocollo di Laboratorio</Button>
                 </Card.Body>
                 <Card.Footer>
                     Esperienza pensata per classi di {e.Classe.toLowerCase()}

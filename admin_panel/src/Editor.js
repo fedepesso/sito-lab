@@ -13,8 +13,7 @@ const cambi = {
     1 : 'scopo',
     2 : 'materiali',
     3 : 'procedimento',
-    4 : 'conclusioni',
-    5 : Magic
+    4 : 'conclusioni'
 }
 
 async function get_protocol(id){
@@ -59,7 +58,6 @@ export const EditWizard = async function(id=undefined) {
 const Submit = (delta) => {
     numeromagico+=delta
     if (numeromagico >= 4) {
-        document.getElementById('upload_button').disabled = false
         numeromagico = 4
     }
     if (numeromagico < 0) {
@@ -76,7 +74,7 @@ const Submit = (delta) => {
 class Edit extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {content: ''}
+        this.state = {content: '', classe: ''}
     }
 
     handleEditorChange(content) {
@@ -85,12 +83,11 @@ class Edit extends React.Component {
 
     render() {
         let render_value;
-        console.log(this.props.default_value )
         if (this.props.default_value === undefined) { render_value = '' } 
-        else {
-            render_value = this.props.default_value
-        }
+        else { render_value = this.props.default_value }
+        console.log(render_value)
         this.state.content = render_value
+        this.state.classe = Protocol.classe
         return(
             <div className='wrapper'>
                 <Nav as="ul">
@@ -103,13 +100,13 @@ class Edit extends React.Component {
                         </Form.Group>
                     </Form>
                     <Form style={{'margin': '10px'}}>
-                        <Form.Group controlId="formClasse" onChange= {(e) => { Protocol.classe = e.target.value }}>
+                        <Form.Group controlId="formClasse" onChange= {(e) => { Protocol.classe = e.target.value}}>
                             <Form.Control as="select">
-                            <option>Prima</option>
-                            <option>Seconda</option>
-                            <option>Terza</option>
-                            <option>Quarta</option>
-                            <option>Quinta</option>
+                            <option value='Prima'>Prima</option>
+                            <option value='Seconda'>Seconda</option>
+                            <option value='Terza'>Terza</option>
+                            <option value='Quarta'>Quarta</option>
+                            <option value='Quinta'>Quinta</option>
                             </Form.Control>
                         </Form.Group>
                     </Form>
@@ -157,4 +154,7 @@ async function Magic() {
         .then(data => data.json())
         .then(success => console.log(success.data));
     }
+    let Protocol = null // l'assegnazione avviene quando viene chiamato WizardEdit e la variabile ritorna null alla fine del ciclo
+    let numeromagico = 0
+    let azione = null
 }
