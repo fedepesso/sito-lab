@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { Editor } from '@tinymce/tinymce-react';
 import { Button, Nav, Badge, Form } from 'react-bootstrap'
+import { RenderPanelHomepage } from './panel.js'
 import './style.css';
 let Protocol = null // l'assegnazione avviene quando viene chiamato WizardEdit e la variabile ritorna null alla fine del ciclo
 let numeromagico = 0
@@ -87,6 +88,9 @@ class Edit extends React.Component {
         return(
             <div className='wrapper'>
                 <Nav as="ul">
+                    <Nav.Item as="li">
+                        <Button variant="outline-light" type="submit" onClick={ RenderPanelHomepage } style={{'margin': '10px'}}> Homepage </Button>
+                    </Nav.Item>
                     <Form style={{'margin': '10px'}}>
                         <Form.Group controlId="formTitolo">
                             <Form.Control placeholder="Titolo" />
@@ -113,7 +117,7 @@ class Edit extends React.Component {
                         <Badge  className='text-light' style={{'marginRight': '10px', 'marginTop': '20px'}} variant='info'>Stai modificando: {cambi[numeromagico]}</Badge >
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Button variant="outline-light" type="submit" onClick={()=>{Magic()}} style={{'margin': '10px'}} id='upload_button'> Carica </Button>
+                        <Button variant="outline-light" type="submit" onClick={()=>{Magic()}} style={{'margin': '10px'}} id='upload_button' disabled> Carica </Button>
                     </Nav.Item>
                 </Nav>
                 <div style={{'margin': '10px'}}>

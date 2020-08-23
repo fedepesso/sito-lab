@@ -23,7 +23,7 @@ async function Modifier(id){
     //
 }
 
-async function PreviewRenderer(year){
+export async function PreviewRenderer(year){
     const list = await get_list(year)
 
     if (list.length === 0) {
@@ -43,22 +43,5 @@ async function PreviewRenderer(year){
             </Row>
         )
     })
-
-
     return (<Container fluid>{cards}</Container>)
 }
-
-
-
-export async function Annual_Modification(year) {
-    const card_list = await PreviewRenderer(year)
-    ReactDOM.render(
-        <div>
-            <div className='content_wrapper'>
-                {card_list}
-            </div>
-        </div>,
-        document.getElementById('root')
-    )
-}
-

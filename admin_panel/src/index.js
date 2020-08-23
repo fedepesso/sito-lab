@@ -4,7 +4,6 @@ import { Form, Button} from 'react-bootstrap'
 import { RenderPanelHomepage } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
-import { Annual_Modification } from './annual.js'
 
 
 const Authentication = function() {
@@ -32,6 +31,4 @@ const validate_user = function() {
   // fare un controllo effettivo delle credenziali
 }
 
-Authentication()
 RenderPanelHomepage()
-Annual_Modification('Prima')

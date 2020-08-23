@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Nav, Button, NavDropdown, DropdownButton } from 'react-bootstrap'
 import { scaleRotate as Menu } from 'react-burger-menu'
 import { EditWizard } from './editor.js'
+import { PreviewRenderer } from './annual.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
 import './sidebar.css';
@@ -14,11 +15,11 @@ const Sidebar = function() {
                 <Nav defaultActiveKey="" className="flex-column">
                     <Button variant="outline-dark lateral" onClick={RenderPanelNewProtocol}>Aggiungi esperienza</Button>
                     <DropdownButton title="Elenco esperienze" key={'down'} id={'dropdown-button-drop-down'} drop={'down'} variant="outline-dark lateral">
-                        <NavDropdown.Item class='btn-dark'>Classe prima</NavDropdown.Item>
-                        <NavDropdown.Item class='bg-dark'>Classe seconda</NavDropdown.Item>
-                        <NavDropdown.Item class='bg-dark'>Classe terza</NavDropdown.Item>
-                        <NavDropdown.Item class='bg-dark'>Classe quarta</NavDropdown.Item>
-                        <NavDropdown.Item class='bg-dark'>Classe quinta</NavDropdown.Item>
+                        <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Prima')}}>Classe prima</NavDropdown.Item>
+                        <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Seconda')}}>Classe seconda</NavDropdown.Item>
+                        <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Terza')}}>Classe terza</NavDropdown.Item>
+                        <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Quarta')}}>Classe quarta</NavDropdown.Item>
+                        <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Quinta')}}>Classe quinta</NavDropdown.Item>
                     </DropdownButton>
                 </Nav>
             </Menu>
@@ -44,4 +45,16 @@ export const RenderPanelHomepage = function() {
 
 const RenderPanelNewProtocol = function() {
     EditWizard()
+}
+
+const ProtocolList = async function(year) {
+    const card_list = await PreviewRenderer(year)
+    ReactDOM.render(
+        <div id={'outer-container'} className='text-light'>
+            <Sidebar />
+            <div id={'page-wrap'} className='wrapper'>
+            {card_list}
+            </div>
+        </div>, 
+        document.getElementById('root'))
 }
