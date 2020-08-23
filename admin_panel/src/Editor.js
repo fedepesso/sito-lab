@@ -85,11 +85,12 @@ class Edit extends React.Component {
 
     render() {
         let render_value;
+        console.log(this.props.default_value )
         if (this.props.default_value === undefined) { render_value = '' } 
         else {
             render_value = this.props.default_value
         }
-        this.setState.content = render_value
+        this.state.content = render_value
         return(
             <div className='wrapper'>
                 <Nav as="ul">
