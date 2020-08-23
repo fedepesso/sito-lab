@@ -2,7 +2,7 @@ CREATE DATABASE lab_db;
 USE lab_db;
 
 CREATE TABLE DataList (
-    ID varchar(16) NOT NULL,
+    ID varchar(32) NOT NULL,
     Classe varchar(256) NOT NULL,
     Titolo varchar(256) NOT NULL,
     Preview varchar(2048) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE DataList (
 );
 
 CREATE TABLE DataContent (
-    ID varchar(16) NOT NULL,
+    ID varchar(32) NOT NULL,
     Scopo TEXT,
     Materiali TEXT,
     Procedimento TEXT,

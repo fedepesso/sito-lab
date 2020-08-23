@@ -15,7 +15,8 @@
     "setup": "npm install && (cd client && npm install) && (cd admin_panel && npm install)"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
     "express": "^4.16.4",
     "express-pino-logger": "^5.0.0",
     "express-validator": "^6.6.1",

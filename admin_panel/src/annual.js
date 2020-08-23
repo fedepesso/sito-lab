@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { EditWizard } from './editor.js'
 import {Button, Row, Col, Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
@@ -14,17 +14,18 @@ async function get_list(year){
 
 
 async function Remover(id){
-    await fetch(`/api/remove_protocol?id=${id}`)
+    await fetch(`/api/remove_protocol?id=${id}`, {method: "POST"})
         .then(data => data.json())
         .then(success => console.log(success.data));
 }
 
 async function Modifier(id){
-    //
+    EditWizard(id)
 }
 
 export async function PreviewRenderer(year){
     const list = await get_list(year)
+    console.log(list)
 
     if (list.length === 0) {
         // restituire testo che avverte della mancanza di esperimenti memorizzati
@@ -32,13 +33,13 @@ export async function PreviewRenderer(year){
 
     let cards = await list.map((e) => {
         return(
-            <Row Style='margin:20px' key={e.ID}>
+            <Row Style='margin:20px' key={e.id}>
                 <Col Style='color:white' xs={6}>
                     {e.Titolo}
                 </Col>
                 <Col>
-                    <Button variant="danger" Style='margin:10px'  onClick={() => Remover(e.ID)}>Rimuovi Protocollo</Button>
-                    <Button variant="warning" Style='margin:10px' onClick={() => Modifier(e.ID)}>Modifica Protocollo</Button>
+                    <Button variant="danger" Style='margin:10px'  onClick={() => Remover(e.id)}>Rimuovi Protocollo</Button>
+                    <Button variant="warning" Style='margin:10px' onClick={() => Modifier(e.id)}>Modifica Protocollo</Button>
                 </Col>
             </Row>
         )
