@@ -3,10 +3,12 @@ const url = require('url')
 const mysql = require('mysql')
 const crypto = require('crypto')
 const parser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT || 5000;
 
+app.use(cors())
 app.use(parser.json())
 
 const user_credentials = {
@@ -24,14 +26,14 @@ const connection = mysql.createConnection({
   password: "root",
   database: "lab_db",
   multipleStatements: true
-});
+})
 
 app.get('/', (req, res) => {
-  //
+  // restituire html sito principale
 })
 
 app.get('/admin', (req, res) => {
-  //
+  // restituire html pannello admin
 })
 
 app.get('/api/collect-preview', (req, res) => {
@@ -58,16 +60,20 @@ app.get('/api/collect-protocol', (req, res) => {
 app.get('/admin/validate_user', (req, res) => {
   const user = url.parse(req.url, true).query.user
   const pwd = url.parse(req.url, true).query.pwd
+  if (user === user_credentials.user && pwd === user_credentials.pwd) {
+    res.send({status : 200})
+  }
+  else {
+    res.send({status : 500})
+  }
 })
 
 app.post('/api/add-protocol', (req, res) => {
   const proto = req.body
-  console.log(proto.scopo)
   let d_obj = new Date()
   const id = crypto.createHash('md5').update(JSON.stringify(req.body)+String(d_obj.getFullYear()+d_obj.getMonth()+d_obj.getDate()+d_obj.getHours()+d_obj.getMinutes()+d_obj.getSeconds())).digest("hex")
   const query = `INSERT INTO datalist VALUES ("${id}", '${proto.classe}', '${proto.titolo}', '${proto.anteprima}');
                 INSERT INTO datacontent VALUES ("${id}", '${proto.scopo}', '${proto.materiali}', '${proto.procedimento}', '${proto.conclusioni}', '', '');`
-
   connection.query(query, function (err, result, fields) {
     if (err) throw err
     res.send({status : 200})
@@ -79,7 +85,6 @@ app.post('/api/modify-protocol', (req, res) => {
   const id = url.parse(req.url, true).query.id
   const query = `UPDATE datalist SET ID='${id}', Classe='${proto.classe}', Titolo='${proto.titolo}', Preview='${proto.anteprima}' WHERE ID ='${id}';
                 UPDATE datacontent SET ID='${id}', Scopo='${proto.scopo}',   Materiali='${proto.materiali}', Procedimento='${proto.procedimento}', Riflessioni='${proto.conclusioni}', ElencoImmagini='', DidascalieImmagini='' WHERE ID = '${id}';`
-  
   connection.query(query, function (err, result, fields) {
     if (err) throw err
     res.send({status : 200})
@@ -89,7 +94,6 @@ app.post('/api/modify-protocol', (req, res) => {
 app.post('/api/remove_protocol', (req, res) => {
   const id = url.parse(req.url, true).query.id
   const query = `DELETE FROM datacontent WHERE ID = '${id}'; DELETE FROM datalist WHERE ID = '${id}'`
-  
   connection.query(query, function (err, result, fields) {
     if (err) throw err
     res.send({status : 200})

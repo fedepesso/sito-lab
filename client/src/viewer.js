@@ -21,6 +21,7 @@ const TemplateFormat = function(props){
             <ul Style='text-align: left; color: white;'>
                 <li>
                     <h2><b>Scopo dell'esperimento</b></h2>
+                    <a href=''></a>
                     <div>{parse(props.scopo)}</div>
                 </li>
                 <li>

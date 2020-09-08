@@ -142,17 +142,14 @@ class Edit extends React.Component {
 }
 
 async function Magic() {
-    console.log(Protocol)
     if (azione === 'creazione') {
         await fetch(`/api/add-protocol`,
         {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
         .then(data => data.json())
-        .then(success => console.log(success.data));
     } else if ( azione === 'modifica' ) {
         await fetch(`/api/modify-protocol?id=${Protocol.id}`,
         {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
         .then(data => data.json())
-        .then(success => console.log(success.data));
     }
     let Protocol = null // l'assegnazione avviene quando viene chiamato WizardEdit e la variabile ritorna null alla fine del ciclo
     let numeromagico = 0

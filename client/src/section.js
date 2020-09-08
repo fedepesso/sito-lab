@@ -20,7 +20,14 @@ async function PreviewRenderer(year){
     const list = await get_list(year)
 
     if (list.length === 0) {
-        // restituire testo che avverte della mancanza di esperimenti memorizzati
+        const dogecoin_value = await get_dogecoin_value()
+        return(
+            <div>
+                <h3 className='text-white'>Ops, non abbiamo trovato esperienze per la classe {year.toLowerCase()} :(</h3>
+                <p className='text-white'>Sappiamo però che il valore del dogecoin è attualmente di {dogecoin_value}€!</p>
+                <img src={process.env.PUBLIC_URL + '/immagine_errori.png'} />
+            </div>
+        )
     }
 
     let cards = await list.map((e) => {
@@ -57,6 +64,12 @@ export async function Section(year){
     </div>,
     document.getElementById('root')
     );
+}
+
+async function get_dogecoin_value(){
+    const value = await fetch('https://api.cryptonator.com/api/ticker/DOGE-usd')
+        .then(data => data.json())
+    return value.ticker.price
 }
 
 
