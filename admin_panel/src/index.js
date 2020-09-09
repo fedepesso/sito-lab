@@ -41,6 +41,7 @@ class Authentication extends React.Component {
     .then(data => data.json())
     .then(success => {
       if (success.status === 200) {
+        sessionStorage.setItem('access-token', success.token)
         RenderPanelHomepage()
       } else {
         this.setState({'show': true})

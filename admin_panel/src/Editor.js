@@ -74,7 +74,7 @@ const Submit = (delta) => {
 class Edit extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {content: '', classe: '', titolo: ''}
+        this.state = {content: '', classe: '', titolo: '', show: false}
     }
 
     handleEditorChange(content) {
@@ -145,11 +145,17 @@ class Edit extends React.Component {
 function Magic() {
     if (azione === 'creazione') {
         fetch(`/api/add-protocol`,
-        {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
+        {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'access-token': sessionStorage.getItem("access-token")}})
         .then(data => data.json())
+        .then(success => {
+            if (success.status !== 600) { alert('Non è stato possibile autenticare la sessione, si prega di rieffettuare l\'accesso') }
+        })
     } else if ( azione === 'modifica' ) {
         fetch(`/api/modify-protocol?id=${Protocol.id}`,
-        {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
+        {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'access-token': sessionStorage.getItem("access-token")}})
         .then(data => data.json())
+        .then(success => {
+            if (success.status === 600) { alert('Non è stato possibile autenticare la sessione, si prega di rieffettuare l\'accesso') }
+        })
     }
 }

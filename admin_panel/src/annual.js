@@ -15,9 +15,11 @@ async function get_list(year){
 
 
 async function Remover(id, year){
-    await fetch(`/api/remove_protocol?id=${id}`, {method: "POST"})
+    await fetch(`/api/remove_protocol?id=${id}`, {method: "POST", headers: {'access-token': sessionStorage.getItem("access-token")}})
         .then(data => data.json())
-        .then(success => console.log(success.data));
+        .then(success => {
+            if (success.status === 600) { alert('Non è stato possibile autenticare la sessione, si prega di rieffettuare l\'accesso')  }
+        })
     ProtocolList(year)
 }
 
@@ -27,6 +29,15 @@ async function Modifier(id){
 
 export async function PreviewRenderer(year){
     const list = await get_list(year)
+
+    if (list.length === 0) {
+        return(
+            <div>
+                <h3 className='text-white'>Nessun esperimento caricato per la classe {year.toLowerCase()}</h3>
+            </div>
+        )
+    }
+
     let cards = await list.map((e) => {
         return(
             <Row style={{'margin': '20px', 'borderStyle': 'solid', 'borderWidth': '1px', 'borderColor': '#efefef'}} key={e.id}>

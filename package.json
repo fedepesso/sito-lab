@@ -19,7 +19,6 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.16.4",
-    "express-pino-logger": "^5.0.0",
     "express-validator": "^6.6.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1"

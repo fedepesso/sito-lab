@@ -25,7 +25,7 @@ async function PreviewRenderer(year){
             <div>
                 <h3 className='text-white'>Ops, non abbiamo trovato esperienze per la classe {year.toLowerCase()} :(</h3>
                 <p className='text-white'>Sappiamo però che il valore del dogecoin è attualmente di {dogecoin_value}€!</p>
-                <img src={process.env.PUBLIC_URL + '/immagine_errori.png'} />
+                <a href='https://en.wikipedia.org/wiki/Dogecoin' target="_blank"><img src={process.env.PUBLIC_URL + '/immagine_errori.png'} /></a>
             </div>
         )
     }
