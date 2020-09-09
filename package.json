@@ -8,7 +8,7 @@
   "scripts": {
     "client": "cd client && npm start",
     "panel": "cd admin_panel && npm start",
-    "server": "npm start",
+    "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "admin": "concurrently --kill-others-on-fail \"npm run server\" \"npm run panel\"",
     "all": "concurrently --kill-others-on-fail \"npm run server\" \"npm run panel\" \"npm run client\"",
@@ -21,7 +21,8 @@
     "express": "^4.16.4",
     "express-validator": "^6.6.1",
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4"
   },
   "devDependencies": {
     "concurrently": "^4.1.2"
