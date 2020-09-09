@@ -13,7 +13,7 @@ const Sidebar = function() {
         <div>
             <Menu pageWrapId={"page-wrap" } outerContainerId={ "outer-container" } id={'menu_container'} style={{'margin': '10px'}} width={'auto'}>
                 <Nav defaultActiveKey="" className="flex-column">
-                    <Button variant="outline-dark lateral" onClick={RenderPanelNewProtocol} style={{'margin-right': '5px'}}>Aggiungi esperienza</Button>
+                    <Button variant="outline-dark lateral" onClick={RenderPanelNewProtocol} style={{'marginRight': '5px'}}>Aggiungi esperienza</Button>
                     <DropdownButton title="Elenco esperienze" key={'down'} id={'dropdown-button-drop-down'} drop={'down'} variant="outline-dark lateral">
                         <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Prima')}}>Classe prima</NavDropdown.Item>
                         <NavDropdown.Item class='bg-dark' onClick={() => {ProtocolList('Seconda')}}>Classe seconda</NavDropdown.Item>
@@ -47,7 +47,7 @@ const RenderPanelNewProtocol = function() {
     EditWizard()
 }
 
-const ProtocolList = async function(year) {
+export const ProtocolList = async function(year) {
     const card_list = await PreviewRenderer(year)
     ReactDOM.render(
         <div id={'outer-container'} className='text-light'>

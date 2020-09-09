@@ -29,11 +29,11 @@ const connection = mysql.createConnection({
 })
 
 app.get('/', (req, res) => {
-  // restituire html sito principale
+  // restituire html compilato sito principale
 })
 
 app.get('/admin', (req, res) => {
-  // restituire html pannello admin
+  // restituire html compilato pannello admin
 })
 
 app.get('/api/collect-preview', (req, res) => {

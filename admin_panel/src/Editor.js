@@ -74,7 +74,7 @@ const Submit = (delta) => {
 class Edit extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {content: '', classe: ''}
+        this.state = {content: '', classe: '', titolo: ''}
     }
 
     handleEditorChange(content) {
@@ -85,9 +85,10 @@ class Edit extends React.Component {
         let render_value;
         if (this.props.default_value === undefined) { render_value = '' } 
         else { render_value = this.props.default_value }
-        console.log(render_value)
+        
         this.state.content = render_value
         this.state.classe = Protocol.classe
+        this.state.titolo = Protocol.titolo
         return(
             <div className='wrapper'>
                 <Nav as="ul">
@@ -96,12 +97,12 @@ class Edit extends React.Component {
                     </Nav.Item>
                     <Form style={{'margin': '10px'}}>
                         <Form.Group controlId="formTitolo">
-                            <Form.Control placeholder="Titolo" type='text' onChange= {(e) => { Protocol.titolo = e.target.value }} />
+                            <Form.Control placeholder="Titolo" type='text' onChange= {(e) => { Protocol.titolo = e.target.value; this.setState({'titolo': e.target.value}) }} value={this.state.titolo} />
                         </Form.Group>
                     </Form>
                     <Form style={{'margin': '10px'}}>
-                        <Form.Group controlId="formClasse" onChange= {(e) => { Protocol.classe = e.target.value}}>
-                            <Form.Control as="select">
+                        <Form.Group controlId="formClasse" onChange= {(e) => { Protocol.classe = e.target.value; this.setState({'classe': e.target.value}) }}>
+                            <Form.Control as="select" value={this.state.classe}>
                             <option value='Prima'>Prima</option>
                             <option value='Seconda'>Seconda</option>
                             <option value='Terza'>Terza</option>
@@ -141,17 +142,14 @@ class Edit extends React.Component {
     }
 }
 
-async function Magic() {
+function Magic() {
     if (azione === 'creazione') {
-        await fetch(`/api/add-protocol`,
+        fetch(`/api/add-protocol`,
         {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
         .then(data => data.json())
     } else if ( azione === 'modifica' ) {
-        await fetch(`/api/modify-protocol?id=${Protocol.id}`,
+        fetch(`/api/modify-protocol?id=${Protocol.id}`,
         {method: "POST", body: JSON.stringify(Protocol), headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}})
         .then(data => data.json())
     }
-    let Protocol = null // l'assegnazione avviene quando viene chiamato WizardEdit e la variabile ritorna null alla fine del ciclo
-    let numeromagico = 0
-    let azione = null
 }
