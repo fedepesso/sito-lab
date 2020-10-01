@@ -1,5 +1,5 @@
 import React from 'react'
-import { EditWizard } from './editor.js'
+import { EditWizard } from './Editor.js'
 import {Button, Row, Col, Container} from 'react-bootstrap'
 import { ProtocolList } from './panel.js'
 import 'bootstrap/dist/css/bootstrap.min.css'

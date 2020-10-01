@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Nav, Button, NavDropdown, DropdownButton } from 'react-bootstrap'
 import { scaleRotate as Menu } from 'react-burger-menu'
-import { EditWizard } from './editor.js'
+import { EditWizard } from './Editor.js'
 import { PreviewRenderer } from './annual.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css';
